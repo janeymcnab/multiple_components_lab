@@ -2,6 +2,7 @@ import { useState } from "react";
 import FilmReleaseList from "../components/FilmReleaseList";
 import ViewMore from "../components/ViewMore";
 import "../App.css"
+import FilmReleaseForm from "../components/FilmReleaseForm";
 
 const FilmReleaseBox = () => {
 
@@ -36,12 +37,19 @@ const FilmReleaseBox = () => {
     
 
     )
+    
+    const addMovie = (submittedMovie) => {
+      submittedMovie.id = Date.now();
+      const updatedFilms = [...films, submittedMovie];
+      setFilms(updatedFilms);
+    }
 
     return (
         <>
         <div className = "film-release-box">
         <h1>Upcoming Film Releases for UK</h1>
         <hr></hr>
+        <FilmReleaseForm onMovieSubmit = {(movie)=> addMovie(movie)}/>
         <FilmReleaseList films = {films}/>
         <ViewMore viewMoreUrl = "https://www.imdb.com/calendar/?region=gb"/>
         </div>
